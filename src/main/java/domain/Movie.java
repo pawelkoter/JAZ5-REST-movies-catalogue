@@ -6,6 +6,16 @@ public class Movie {
     private String genre;
     private int year;
 
+    public final static Movie NULL;
+
+    static {
+        NULL = new Movie();
+        NULL.setId( -1 );
+        NULL.setTitle( "" );
+        NULL.setGenre( "" );
+        NULL.setYear( 0 );
+    }
+
     public int getId() {
         return id;
     }

@@ -1,4 +1,15 @@
 
+{
+    "title" : "Forrest Gump",
+    "genre" : "comedy",
+    "year" : "1994"
+}
+{
+    "title" : "Iron Man",
+    "genre" : "action",
+    "year" : "2008"
+}
+
 GET:		movies-catalogue/movies/{id}
 POST:		movies-catalogue/movies
 PUT:		movies-catalogue/movies/{id}
@@ -22,13 +33,3 @@ POST:		movies-catalogue/actors
 
 PUT:		movies-catalogue/actors/{id}/movies/{id}
 PUT:		movies-catalogue/movies/{id}/actors/{id}
-
-
-
-
-
-
-
-
-
-

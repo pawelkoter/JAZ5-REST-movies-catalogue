@@ -19,6 +19,21 @@ public class MoviesResources {
         return moviesDB.getAll();
     }
 
+    @GET
+    @Path( "/{id}" )
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response get(@PathParam( "id" ) int id){
+        Movie result =  moviesDB.get( id );
+
+        if (result != Movie.NULL ) {
+            return Response.ok( result ).build();
+        }
+        else {
+            return Response.status( Response.Status.NOT_FOUND ).build();
+        }
+
+    }
+
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response add(Movie movie) {
