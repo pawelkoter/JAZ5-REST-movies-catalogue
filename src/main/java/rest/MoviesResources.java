@@ -41,6 +41,21 @@ public class MoviesResources {
         return Response.ok(movie.getId()).build();
     }
 
+    @PUT
+    @Path( "/{id}" )
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response update(@PathParam( "id" ) int id, Movie movie) {
+        movie.setId( id );
+        try {
+            moviesDB.update( movie );
+            return Response.ok().build();
+        } catch ( RuntimeException e ) {
+            return Response.status( Response.Status.NOT_FOUND )
+                    .entity( e.getMessage() )
+                    .build();
+        }
+    }
+
     @DELETE
     @Path( "/{id}" )
     public Response delete(@PathParam( "id" ) int id) {

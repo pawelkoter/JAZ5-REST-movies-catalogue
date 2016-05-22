@@ -34,6 +34,17 @@ public class MoviesService {
         currentId++;
     }
 
+    public void update(Movie movie) {
+        Movie old = get( movie.getId() );
+        if ( old != Movie.NULL ) {
+            movieList.remove( old );
+            movieList.add( movie );
+        }
+        else {
+            throw new RuntimeException( String.format( "Could not update movie with id = %d : movie not found", movie.getId() ) );
+        }
+    }
+
     public boolean delete(int id) {
         return movieList.removeIf( m -> m.getId() == id );
     }
