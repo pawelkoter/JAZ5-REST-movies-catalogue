@@ -8,6 +8,7 @@ import service.MoviesService;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Path("/movies")
@@ -86,6 +87,38 @@ public class MoviesResources {
         }
         else {
             return Response.status( Response.Status.NOT_FOUND ).build();
+        }
+    }
+
+    @GET
+    @Path( "/{movieId}/rating" )
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getRating(@PathParam( "movieId" ) int id) {
+        Movie movie = moviesDB.get( id );
+        if ( movie != Movie.NULL ) {
+            BigDecimal rating = movie.getRating();
+            return Response.ok(rating).build();
+        }
+        else {
+            return Response.status( Response.Status.NOT_FOUND ).build();
+        }
+    }
+
+    @POST
+    @Path( "/{movieId}/rating/{rating}" )
+    public Response addRating( @PathParam( "movieId" ) int movieId, @PathParam( "rating" ) int rating) {
+        Movie movie = moviesDB.get( movieId );
+
+        try {
+            if ( movie != Movie.NULL ) {
+                movie.addRating( rating );
+                return Response.ok().build();
+            }
+            else {
+                return Response.status( Response.Status.NOT_FOUND ).build();
+            }
+        } catch ( RuntimeException e ) {
+            return Response.status( Response.Status.NOT_FOUND ).entity( e.getMessage() ).build();
         }
     }
 

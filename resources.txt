@@ -38,7 +38,7 @@ DELETE:		movies-catalogue/movies/{id}/comments/{id}
 
 
 GET:		movies-catalogue/movies/{id}/rating
-POST:		movies-catalogue/movies/{id}/rating
+POST:		movies-catalogue/movies/{id}/rating/{value}
 
 
 -------- BONUS ----------
