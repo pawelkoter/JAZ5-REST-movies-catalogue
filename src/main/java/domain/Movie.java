@@ -1,10 +1,14 @@
 package domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Movie {
     private int id;
     private String title;
     private String genre;
     private int year;
+    private List<Comment> commentList = new ArrayList<>(  );
 
     public final static Movie NULL;
 
@@ -46,5 +50,13 @@ public class Movie {
 
     public void setYear(int year) {
         this.year = year;
+    }
+
+    public List< Comment > getComments() {
+        return commentList;
+    }
+
+    public void setComments( List< Comment > commentList ) {
+        this.commentList = commentList;
     }
 }

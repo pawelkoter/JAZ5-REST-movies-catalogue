@@ -2,7 +2,15 @@
 {
     "title" : "Forrest Gump",
     "genre" : "comedy",
-    "year" : "1994"
+    "year" : "1994",
+    "comments" : [
+        {
+            "content" : "Great movie, I almost cried"
+        },
+        {
+            "content" : "I lauhed to death"
+        }
+    ]
 }
 {
     "title" : "Iron Man",

@@ -1,6 +1,7 @@
 package rest;
 
 
+import domain.Comment;
 import domain.Movie;
 import service.MoviesService;
 
@@ -65,5 +66,12 @@ public class MoviesResources {
         else {
             return Response.status( Response.Status.NOT_FOUND ).build();
         }
+    }
+
+    @GET
+    @Path( "/{movieId}/comments" )
+    @Produces(MediaType.APPLICATION_JSON)
+    public List< Comment > getComments( @PathParam( "movieId" ) int movieId){
+        return moviesDB.get( movieId ).getComments();
     }
 }
