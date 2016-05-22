@@ -1,4 +1,4 @@
-
+----- Movie with comments -----
 {
     "title" : "Forrest Gump",
     "genre" : "comedy",
@@ -12,11 +12,19 @@
         }
     ]
 }
+
+----- Simple movie -----
 {
     "title" : "Iron Man",
     "genre" : "action",
     "year" : "2008"
 }
+
+----- Comment -----
+{
+    "content" : "Sensational, grandly sinister and not for the kids."
+}
+
 
 GET:		movies-catalogue/movies/{id}
 POST:		movies-catalogue/movies

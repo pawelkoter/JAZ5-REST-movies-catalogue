@@ -74,4 +74,19 @@ public class MoviesResources {
     public List< Comment > getComments( @PathParam( "movieId" ) int movieId){
         return moviesDB.get( movieId ).getComments();
     }
+
+    @POST
+    @Path( "/{movieId}/comments" )
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addComment( @PathParam( "movieId" ) int movieId, Comment comment) {
+        Movie movie = moviesDB.get( movieId );
+        if ( movie != Movie.NULL ) {
+            movie.getComments().add( comment );
+            return Response.ok().build();
+        }
+        else {
+            return Response.status( Response.Status.NOT_FOUND ).build();
+        }
+    }
+
 }
