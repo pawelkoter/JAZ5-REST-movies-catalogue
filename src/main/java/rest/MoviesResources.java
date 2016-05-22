@@ -41,4 +41,14 @@ public class MoviesResources {
         return Response.ok(movie.getId()).build();
     }
 
+    @DELETE
+    @Path( "/{id}" )
+    public Response delete(@PathParam( "id" ) int id) {
+        if (moviesDB.delete( id )) {
+            return Response.ok().build();
+        }
+        else {
+            return Response.status( Response.Status.NOT_FOUND ).build();
+        }
+    }
 }

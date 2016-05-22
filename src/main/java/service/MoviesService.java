@@ -33,4 +33,8 @@ public class MoviesService {
         movieList.add(movie);
         currentId++;
     }
+
+    public boolean delete(int id) {
+        return movieList.removeIf( m -> m.getId() == id );
+    }
 }
