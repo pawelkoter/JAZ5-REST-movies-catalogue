@@ -1,0 +1,34 @@
+
+GET:		movies-catalogue/movies/{id}
+POST:		movies-catalogue/movies
+PUT:		movies-catalogue/movies/{id}
+DELETE		movies-catalogue/movies/{id}
+
+
+GET:		movies-catalogue/movies/{id}/comments
+POST:		movies-catalogue/movies/{id}/comments
+DELETE:		movies-catalogue/movies/{id}/comments/{id}
+
+
+GET:		movies-catalogue/movies/{id}/rating
+POST:		movies-catalogue/movies/{id}/rating
+
+
+-------- BONUS ----------
+GET:		movies-catalogue/actors/{id}/movies
+GET			movies-catalogue/movies/{id}/actors
+
+POST:		movies-catalogue/actors
+
+PUT:		movies-catalogue/actors/{id}/movies/{id}
+PUT:		movies-catalogue/movies/{id}/actors/{id}
+
+
+
+
+
+
+
+
+
+
