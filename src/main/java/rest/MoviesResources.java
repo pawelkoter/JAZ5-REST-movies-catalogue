@@ -80,14 +80,29 @@ public class MoviesResources {
     @Path( "/{movieId}/comments" )
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addComment( @PathParam( "movieId" ) int movieId, Comment comment) {
+        try {
+            moviesDB.addComment( movieId , comment);
+            return Response.ok(comment.getId()).build();
+        } catch ( RuntimeException e ) {
+            return Response.status( Response.Status.NOT_FOUND ).entity( e.getMessage() ).build();
+        }
+    }
+
+    @DELETE
+    @Path( "/{movieId}/comments/{commentId}" )
+    public Response deleteComment(@PathParam( "movieId" ) int movieId, @PathParam( "commentId" ) int commentId) {
+        Response response = Response.status( Response.Status.NOT_FOUND ).build();
+
         Movie movie = moviesDB.get( movieId );
         if ( movie != Movie.NULL ) {
-            movie.getComments().add( comment );
-            return Response.ok().build();
+            boolean success = movie.getComments().removeIf( c -> c.getId() == commentId );
+
+            if ( success ) {
+                response = Response.ok().build();
+            }
         }
-        else {
-            return Response.status( Response.Status.NOT_FOUND ).build();
-        }
+
+        return response;
     }
 
     @GET

@@ -1,6 +1,7 @@
 package service;
 
 
+import domain.Comment;
 import domain.Movie;
 
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.Optional;
 public class MoviesService {
     private static List<Movie> movieList = new ArrayList<>();
     private static int currentId;
+    private static int currentCommentId;
 
     public List<Movie> getAll() {
         return movieList;
@@ -32,6 +34,7 @@ public class MoviesService {
         movie.setId(currentId);
         movieList.add(movie);
         currentId++;
+        updateComments( movie );
     }
 
     public void update(Movie movie) {
@@ -39,6 +42,7 @@ public class MoviesService {
         if ( old != Movie.NULL ) {
             movieList.remove( old );
             movieList.add( movie );
+            updateComments( movie );
         }
         else {
             throw new RuntimeException( String.format( "Could not update movie with id = %d : movie not found", movie.getId() ) );
@@ -47,5 +51,25 @@ public class MoviesService {
 
     public boolean delete(int id) {
         return movieList.removeIf( m -> m.getId() == id );
+    }
+
+    public void addComment( int movieId, Comment comment ) {
+        Movie movie = get( movieId );
+
+        if( movie != Movie.NULL ) {
+            comment.setId( currentId );
+            currentCommentId++;
+            movie.getComments().add( comment );
+        }
+        else {
+            throw new RuntimeException( String.format( "Could not add comment for movie with id = %d : movie not found", movieId ) );
+        }
+    }
+
+    private void updateComments( Movie movie ) {
+        for ( Comment c : movie.getComments()) {
+            c.setId( currentCommentId );
+            currentCommentId++;
+        }
     }
 }
