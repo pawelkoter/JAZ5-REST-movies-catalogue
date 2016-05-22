@@ -91,18 +91,12 @@ public class MoviesResources {
     @DELETE
     @Path( "/{movieId}/comments/{commentId}" )
     public Response deleteComment(@PathParam( "movieId" ) int movieId, @PathParam( "commentId" ) int commentId) {
-        Response response = Response.status( Response.Status.NOT_FOUND ).build();
-
-        Movie movie = moviesDB.get( movieId );
-        if ( movie != Movie.NULL ) {
-            boolean success = movie.getComments().removeIf( c -> c.getId() == commentId );
-
-            if ( success ) {
-                response = Response.ok().build();
-            }
+        try {
+            moviesDB.deleteComment( movieId , commentId);
+            return Response.ok().build();
+        } catch ( RuntimeException e ) {
+            return Response.status( Response.Status.NOT_FOUND ).entity( e.getMessage() ).build();
         }
-
-        return response;
     }
 
     @GET

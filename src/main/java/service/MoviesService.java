@@ -72,4 +72,20 @@ public class MoviesService {
             currentCommentId++;
         }
     }
+
+    public void deleteComment( int movieId, int commentId ) {
+        Movie movie = get( movieId );
+
+        if( movie != Movie.NULL ) {
+            boolean success = movie.getComments().removeIf( c -> c.getId() == commentId );
+
+            if (!success) {
+                throw new RuntimeException(
+                    String.format( "Could not delete comment with id = %d for movie with id = %d : comment not found", commentId, movieId ) );
+            }
+        }
+        else {
+            throw new RuntimeException( String.format( "Could not delete comment for movie with id = %d : movie not found", movieId ) );
+        }
+    }
 }
